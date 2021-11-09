@@ -7,3 +7,13 @@ h1 {
     padding-bottom: 0.2em;
     padding-left: 1em;
 }
+
+.table-head {
+    text-align: center;
+    background-color: brown;
+}
+
+.table-data {
+    border: 3px solid black;
+    padding: 1em;
+}
