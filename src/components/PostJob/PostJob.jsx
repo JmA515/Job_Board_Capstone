@@ -5,7 +5,7 @@ const PostJob = (props) => {
         title: "",
         description: "",
         status: "available",
-        post_date: ""
+        post_date: props.currentDate
     })
   
     const handleChange = (event) => {

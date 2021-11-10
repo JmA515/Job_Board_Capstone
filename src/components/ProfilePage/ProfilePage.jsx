@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 const ProfilePage = (props) => {
     const [editProfile, setEditProfile] = useState({
@@ -24,15 +24,15 @@ const ProfilePage = (props) => {
   
     }
 
-    const updateProfile = async (updateUserObject, jwt) => {
-        console.log(jwt, updateUserObject)
-        try {
-            const response = await axios.post('http://127.0.0.1:8000/api/users/profile/' , { headers: {Authorization: 'Bearer ' + jwt}}, updateUserObject);
-            window.location = '/profile';
-          } catch(error) {
-            console.log(error, 'error with profile edit');
-          }
-      }
+    // const updateProfile = async (updateUserObject, jwt) => {
+    //     console.log(jwt, updateUserObject)
+    //     try {
+    //         const response = await axios.post('http://127.0.0.1:8000/api/users/profile/' , { headers: {Authorization: 'Bearer ' + jwt}}, updateUserObject);
+    //         window.location = '/profile';
+    //       } catch(error) {
+    //         console.log(error, 'error with profile edit');
+    //       }
+    //   }
   
     return(
       <div>
