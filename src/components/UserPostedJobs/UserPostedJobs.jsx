@@ -1,4 +1,8 @@
 import React from "react";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import './UserPostedJobs.css'
+
 
 const filterByStatus = (status) => (allJobs) => {
     if (allJobs.status != status) {
@@ -13,7 +17,7 @@ const UserPostedJobs = (props) => {
             {/* {console.log(props.userId)} */}
             {/* {console.log(props.jobs)} */}
             <h1>Posted Jobs</h1>
-            <table>
+            <Table variant="dark" style={{width:"50%", marginLeft: "auto", marginRight: "auto"}}>
                 {props.jobs
                     .filter(filterByStatus("completed"))
                     .filter((foundJobs) => {
@@ -25,17 +29,17 @@ const UserPostedJobs = (props) => {
                     .map((job) => (
                         <tr key={job.id}>
                             <td>
-                                <div className="border">
-                                    <p>Title: {job.title}</p>
-                                    <p>Description: {job.description}</p>
-                                    <p>Job Status: {job.status}</p>
+                                <div className="border" style={{textAlign:"center"}}>
+                                    <p>Title: <br />{job.title}</p>
+                                    <p>Description: <br />{job.description}</p>
+                                    <p>Job Status: <br />{job.status}</p>
                                 </div>
                             </td>
                         </tr>
                     ))}
-            </table>
+            </Table>
             <h1>Completed Posted Jobs</h1>
-            <table>
+            <Table variant="dark" style={{width:"50%", marginLeft: "auto", marginRight: "auto"}}>
                 {props.jobs
                     .filter((foundJobs) => {
                         //   console.log(foundJobs)
@@ -48,17 +52,17 @@ const UserPostedJobs = (props) => {
                     .map((job) => (
                         <tr key={job.id}>
                             <td>
-                                <div className="border">
-                                    <p>Title: {job.title}</p>
-                                    <p>Description: {job.description}</p>
-                                    <button className="btn btn-outline-success button-row" onClick={() => props.rateJob(job.job_accepter)}>
+                                <div className="border" style={{textAlign:"center"}}>
+                                    <p>Title: <br />{job.title}</p>
+                                    <p>Description: <br />{job.description}</p>
+                                    <Button className="btn button-row" variant="warning" onClick={() => props.rateJob(job.job_accepter)}>
                                         Rate Job
-                                    </button>
+                                    </Button>
                                 </div>
                             </td>
                         </tr>
                     ))}
-            </table>
+            </Table>
         </div>
     );
 };

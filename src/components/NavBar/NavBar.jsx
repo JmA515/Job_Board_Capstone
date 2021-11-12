@@ -60,9 +60,9 @@ const NavBar = (props) => {
                 </React.Fragment>
             }
             </Nav>
-            <h1 style={{textAlign:"center", padding:"1em"}}>
-                {props.user && <h3>Welcome {props.user.first_name}</h3>}
-            </h1>
+            <div style={{padding:"3em"}}>
+                {props.user && <h1>Welcome {props.user.first_name}</h1>}
+            </div>
         </div>
      );
 }

@@ -82,17 +82,17 @@ const TitleBar = (props) => {
                                         Description:
                                         <br /> {job.description}
                                     </p>
-                                    
-                                    
-                                </div>
                                     <Button
-                                        className="btn"
-                                        variant="primary"
+                                        className="btn button-row"
+                                        variant="warning"
                                         onClick={() => props.acceptJob(job.id)}
                                         style={{margin:".25em"}}
                                         >
                                         Accept Job
                                     </Button>
+                                    
+                                    
+                                </div>
                                         <br></br>
                                         <br></br>
                             </td>
