@@ -10,6 +10,7 @@ import TitleBar from "./TitleBar/TitleBar";
 import ProfilePage from "./ProfilePage/ProfilePage";
 import PostJob from "./PostJob/PostJob";
 import UserAcceptedJobs from "./UserAcceptedJobs/UserAcceptedJobs";
+import UserPostedJobs from "./UserPostedJobs/UserPostedJobs";
 
 class App extends Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class App extends Component {
 
         this.state = {
             user: null,
+            userId: null,
             jwtToken: null,
             jobs: [],
             tokenCheck: false,
@@ -64,9 +66,11 @@ class App extends Component {
         const jwt = localStorage.getItem("token");
         try {
             const user = jwtDecode(jwt);
+            console.log(user.user_id);
             this.setState(
                 {
                     user: user,
+                    userId: user.user_id,
                     jwtToken: jwt,
                 },
                 () => {
@@ -133,6 +137,7 @@ class App extends Component {
             let response = await axios.post("http://127.0.0.1:8000/api/jobs/", newJobObject, {
                 headers: { Authorization: "Bearer " + this.state.jwtToken },
             });
+            window.location = "/home";
             this.getAllJobs();
         } catch (error) {
             console.log(error, "error posting job");
@@ -144,7 +149,7 @@ class App extends Component {
         try {
             let thing = {
                 job_accepter: acceptingUser.user_id,
-                status: "ACCEPTED",
+                status: "accepted",
             };
             let response = await axios.patch(`http://127.0.0.1:8000/api/jobs/accept/${jobId}/`, thing, {
                 headers: { Authorization: "Bearer " + localStorage.getItem("token") },
@@ -155,8 +160,49 @@ class App extends Component {
         }
     };
 
+    jobComplete = async (jobId) => {
+        // let acceptingUser = jwtDecode(localStorage.getItem("token"));
+        try {
+            let thing = {
+                // job_accepter: acceptingUser.user_id,
+                status: "completed",
+            };
+            let response = await axios.patch(`http://127.0.0.1:8000/api/jobs/accept/${jobId}/`, thing, {
+                headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+            });
+            this.getAllJobs();
+        } catch (error) {
+            console.log(error, "error posting job");
+        }
+    };
+
+    rateJob = async (userRatedId) => {
+        let rating = prompt("Please rate from 1-5");
+        console.log(parseInt(rating));
+        try {
+            let response = await axios.get(`http://127.0.0.1:8000/api/users/profile/${userRatedId}`, {
+                headers: { Authorization: "Bearer " + this.state.jwtToken },
+            });
+            console.log("rate response", response.data);
+            return response.data;
+        } catch (er) {
+            console.log("Error with the userDetails", er);
+        }
+        //     try {
+        //     let thing = {
+        //         job_satisfaction_rating: job_satisfaction_rating += parseInt(rating),
+        //     };
+        //     let response = await axios.patch(`http://127.0.0.1:8000/api/users/profile/${userRatedId}/`, thing, {
+        //         headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        //     });
+        //     this.getAllJobs();
+        // } catch (error) {
+        //     console.log(error, "error posting job");
+        // }
+    };
+
     render() {
-        console.log(this.state);
+        // console.log(this.state);
         if (!this.state.jwtToken) {
             return (
                 <div>
@@ -176,6 +222,30 @@ class App extends Component {
                     <Route path="/register" render={(props) => <RegisterUser {...props} registerUser={this.registerUser} />} />
                     <Route path="/login" render={(props) => <Login {...props} login={this.loginUser} />} />
 
+                    <Route
+                        path="/accepted_jobs"
+                        render={(props) => (
+                            <UserAcceptedJobs
+                                {...props}
+                                user={this.state.user}
+                                jobs={this.state.jobs}
+                                userId={this.state.userId}
+                                jobComplete={this.jobComplete}
+                            />
+                        )}
+                    />
+                    <Route
+                        path="/posted_jobs"
+                        render={(props) => (
+                            <UserPostedJobs
+                                {...props}
+                                user={this.state.user}
+                                jobs={this.state.jobs}
+                                userId={this.state.userId}
+                                rateJob={this.rateJob}
+                            />
+                        )}
+                    />
                     <>
                         <Route
                             path="/profile"
@@ -194,7 +264,6 @@ class App extends Component {
                             )}
                         />
                     </>
-                    <Route path="/accepted_jobs" render={(props) => <UserAcceptedJobs {...props} user={this.state.user} jobs={this.state.jobs} />} />
                     {/* <Route 
                         path = "/home" 
                         render = {props => {

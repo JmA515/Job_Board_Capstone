@@ -15,7 +15,7 @@ const NavBar = (props) => {
                         <Button className="nav-button" variant="primary">Post Jobs</Button>
                     </Link>
 
-                    <Link to = "/">
+                    <Link to = "/posted_jobs">
                         <Button className="nav-button" variant="primary">My Listed Jobs</Button>
                     </Link>
 

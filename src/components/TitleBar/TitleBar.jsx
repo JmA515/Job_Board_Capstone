@@ -35,7 +35,6 @@
 
 // export default TitleBar;
 
-import userEvent from "@testing-library/user-event";
 import React, { useState } from "react";
 // import { Link } from "react-router-dom";
 
@@ -53,6 +52,11 @@ const TitleBar = (props) => {
             />
             <table>
                 {props.jobs
+                    .filter((allJobs) => {
+                        if (allJobs.status === "available") {
+                            return allJobs;
+                        } 
+                    })
                     .filter((foundJobs) => {
                         if (searchTerm === "") {
                             return foundJobs;
