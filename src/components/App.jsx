@@ -11,6 +11,7 @@ import ProfilePage from "./ProfilePage/ProfilePage";
 import PostJob from "./PostJob/PostJob";
 import UserAcceptedJobs from "./UserAcceptedJobs/UserAcceptedJobs";
 import UserPostedJobs from "./UserPostedJobs/UserPostedJobs";
+import { Container } from "react-bootstrap";
 
 class App extends Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class App extends Component {
         try {
             const response = await axios.post("http://127.0.0.1:8000/api/auth/register/", userRegisteredObject);
             //   this.loginUser({'userName' : userRegisteredObject.userName, 'password': userRegisteredObject.password })
-            window.location = "/register";
+            window.location = "/login";
         } catch (error) {
             console.log(error, "error with register user");
         }
@@ -55,7 +56,7 @@ class App extends Component {
             let jwt = this.token();
             this.getUserDetails(this.state.user.user_id);
             console.log("Login State user:", this.state.user);
-            // window.location='/home'
+            window.location='/home'
         } catch (error) {
             console.log(error, "error with logged in user");
             return error;
@@ -116,7 +117,6 @@ class App extends Component {
 
     logOutUser = () => {
         localStorage.removeItem("token");
-        window.location = "/";
         this.setState({ user: null });
     };
 
@@ -206,8 +206,15 @@ class App extends Component {
         if (!this.state.jwtToken) {
             return (
                 <div>
-                    <Login login={this.loginUser} />
-                    {/* <Route path="/login" render={(props) => <Login {...props} login={this.loginUser} />} /> */}
+                    
+                    {/* <Login login={this.loginUser} /> */}
+                    <Container>
+                        <NavBar  user={this.state.user} logOutUser={this.logOutUser} />
+                    </Container>
+                    <Switch>
+                        <Route path="/register" render={(props) => <RegisterUser {...props} registerUser={this.registerUser} />} />
+                        <Route path="/login" render={(props) => <Login {...props} login={this.loginUser} />} />
+                    </Switch>
                 </div>
             );
         }
@@ -216,8 +223,8 @@ class App extends Component {
         }
 
         return (
-            <div className="container-fluid">
-                <NavBar user={this.state.user} logOutUser={this.logOutUser} />
+            <div className="container-fluid bg-color">
+                <NavBar  user={this.state.user} logOutUser={this.logOutUser} />
                 <Switch>
                     <Route path="/register" render={(props) => <RegisterUser {...props} registerUser={this.registerUser} />} />
                     <Route path="/login" render={(props) => <Login {...props} login={this.loginUser} />} />

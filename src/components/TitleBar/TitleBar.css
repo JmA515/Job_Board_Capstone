@@ -10,10 +10,14 @@ h1 {
 
 .table-head {
     text-align: center;
-    background-color: brown;
+    padding: 1em;
 }
 
 .table-data {
     border: 3px solid black;
     padding: 1em;
+}
+
+.btn-color {
+    color: cadetblue;
 }

@@ -1,8 +1,8 @@
 import React from "react";
 
-const filterByStatus = (status) => (foundJobs) => {
-    if (foundJobs.status === status) {
-        return foundJobs;
+const filterByStatus = (status) => (allJobs) => {
+    if (allJobs.status != status) {
+        return allJobs;
     }
 };
 
@@ -15,7 +15,7 @@ const UserPostedJobs = (props) => {
             <h1>Posted Jobs</h1>
             <table>
                 {props.jobs
-                    .filter(filterByStatus("accepted"))
+                    .filter(filterByStatus("completed"))
                     .filter((foundJobs) => {
                         //   console.log(foundJobs)
                         if (props.userId === foundJobs.job_creator_id) {
@@ -34,7 +34,7 @@ const UserPostedJobs = (props) => {
                         </tr>
                     ))}
             </table>
-            <h1>My Completed Jobs</h1>
+            <h1>Completed Posted Jobs</h1>
             <table>
                 {props.jobs
                     .filter((foundJobs) => {
@@ -43,7 +43,8 @@ const UserPostedJobs = (props) => {
                             return foundJobs;
                         }
                     })
-                    .filter(filterByStatus("completed"))
+                    .filter(filterByStatus("available"))
+                    .filter(filterByStatus("accepted"))
                     .map((job) => (
                         <tr key={job.id}>
                             <td>
