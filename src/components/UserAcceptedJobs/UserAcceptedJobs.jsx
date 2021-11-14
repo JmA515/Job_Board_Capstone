@@ -1,4 +1,7 @@
 import React from "react";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+
 
 const UserAcceptedJobs = (props) => {
 
@@ -8,7 +11,7 @@ const UserAcceptedJobs = (props) => {
       {/* {console.log(props.userId)} */}
       {/* {console.log(props.jobs)} */}
       <h1>Accepted Jobs</h1>
-      <table>
+      <Table variant="dark" style={{width:"50%", marginLeft: "auto", marginRight: "auto"}}>
         {props.jobs
           .filter((allJobs) => {
             //   console.log(allJobs)
@@ -25,16 +28,16 @@ const UserAcceptedJobs = (props) => {
           .map((job) => (
             <tr key={job.id}>
               <td>
-              <div className="border">
+              <div className="border" style={{textAlign:"center"}}>
                     <p>Title: {job.title}</p>
                     <p>Description: {job.description}</p>
-                    <button className="btn btn-outline-success button-row" onClick={() => props.jobComplete(job.id)}>Job Complete</button>
+                    <Button className="btn button-row" variant="warning" onClick={() => props.jobComplete(job.id)}>Job Complete</Button>
                 </div>
 
               </td>
             </tr>
           ))}
-      </table>
+      </Table>
     </div>
   );
 };

@@ -208,13 +208,13 @@ class App extends Component {
                 <div>
                     
                     {/* <Login login={this.loginUser} /> */}
-                    <Container>
+                    <Container fluid>
                         <NavBar  user={this.state.user} logOutUser={this.logOutUser} />
+                        <Switch>
+                            <Route path="/register" render={(props) => <RegisterUser {...props} registerUser={this.registerUser} />} />
+                            <Route path="/login" render={(props) => <Login {...props} login={this.loginUser} />} />
+                        </Switch>
                     </Container>
-                    <Switch>
-                        <Route path="/register" render={(props) => <RegisterUser {...props} registerUser={this.registerUser} />} />
-                        <Route path="/login" render={(props) => <Login {...props} login={this.loginUser} />} />
-                    </Switch>
                 </div>
             );
         }
@@ -223,67 +223,69 @@ class App extends Component {
         }
 
         return (
-            <div className="container-fluid bg-color">
-                <NavBar  user={this.state.user} logOutUser={this.logOutUser} />
-                <Switch>
-                    <Route path="/register" render={(props) => <RegisterUser {...props} registerUser={this.registerUser} />} />
-                    <Route path="/login" render={(props) => <Login {...props} login={this.loginUser} />} />
+            <Container fluid>
+                <div className="bg-color">
+                    <NavBar  user={this.state.user} logOutUser={this.logOutUser} />
+                    <Switch>
+                        <Route path="/register" render={(props) => <RegisterUser {...props} registerUser={this.registerUser} />} />
+                        <Route path="/login" render={(props) => <Login {...props} login={this.loginUser} />} />
 
-                    <Route
-                        path="/accepted_jobs"
-                        render={(props) => (
-                            <UserAcceptedJobs
-                                {...props}
-                                user={this.state.user}
-                                jobs={this.state.jobs}
-                                userId={this.state.userId}
-                                jobComplete={this.jobComplete}
-                            />
-                        )}
-                    />
-                    <Route
-                        path="/posted_jobs"
-                        render={(props) => (
-                            <UserPostedJobs
-                                {...props}
-                                user={this.state.user}
-                                jobs={this.state.jobs}
-                                userId={this.state.userId}
-                                rateJob={this.rateJob}
-                            />
-                        )}
-                    />
-                    <>
                         <Route
-                            path="/profile"
+                            path="/accepted_jobs"
                             render={(props) => (
-                                <ProfilePage {...props} user={this.state.user} updateProfile={this.updateProfile} jwt={this.state.jwtToken} />
+                                <UserAcceptedJobs
+                                    {...props}
+                                    user={this.state.user}
+                                    jobs={this.state.jobs}
+                                    userId={this.state.userId}
+                                    jobComplete={this.jobComplete}
+                                />
                             )}
                         />
                         <Route
-                            path="/home"
-                            render={(props) => <TitleBar {...props} getAllJobs={this.getAllJobs} jobs={this.state.jobs} acceptJob={this.acceptJob} />}
-                        />
-                        <Route
-                            path="/post_job"
+                            path="/posted_jobs"
                             render={(props) => (
-                                <PostJob {...props} postJob={this.postJob} user={this.state.user} currentDate={this.state.currentDate} />
+                                <UserPostedJobs
+                                    {...props}
+                                    user={this.state.user}
+                                    jobs={this.state.jobs}
+                                    userId={this.state.userId}
+                                    rateJob={this.rateJob}
+                                />
                             )}
                         />
-                    </>
-                    {/* <Route 
-                        path = "/home" 
-                        render = {props => {
-                        if(!this.state.user){
-                            return <Redirect to = '/login' />;
-                        } else {
-                            return <TitleBar user = {this.state.user}/> 
-                            }
-                        }} 
-                    /> */}
-                    {/* <Redirect to="/" /> */}
-                </Switch>
-            </div>
+                        <>
+                            <Route
+                                path="/profile"
+                                render={(props) => (
+                                    <ProfilePage {...props} user={this.state.user} updateProfile={this.updateProfile} jwt={this.state.jwtToken} />
+                                )}
+                            />
+                            <Route
+                                path="/home"
+                                render={(props) => <TitleBar {...props} getAllJobs={this.getAllJobs} jobs={this.state.jobs} acceptJob={this.acceptJob} />}
+                            />
+                            <Route
+                                path="/post_job"
+                                render={(props) => (
+                                    <PostJob {...props} postJob={this.postJob} user={this.state.user} currentDate={this.state.currentDate} />
+                                )}
+                            />
+                        </>
+                        {/* <Route 
+                            path = "/home" 
+                            render = {props => {
+                            if(!this.state.user){
+                                return <Redirect to = '/login' />;
+                            } else {
+                                return <TitleBar user = {this.state.user}/> 
+                                }
+                            }} 
+                        /> */}
+                        {/* <Redirect to="/" /> */}
+                    </Switch>
+                </div>
+            </Container>
         );
     }
 }
