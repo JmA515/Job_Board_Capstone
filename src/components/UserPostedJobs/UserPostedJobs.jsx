@@ -1,8 +1,8 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import './UserPostedJobs.css'
-
+import "./UserPostedJobs.css";
+import { JobCard } from "../JobCard";
 
 const filterByStatus = (status) => (allJobs) => {
     if (allJobs.status != status) {
@@ -17,7 +17,7 @@ const UserPostedJobs = (props) => {
             {/* {console.log(props.userId)} */}
             {/* {console.log(props.jobs)} */}
             <h1>Posted Jobs</h1>
-            <Table variant="dark" style={{width:"50%", marginLeft: "auto", marginRight: "auto"}}>
+            <Table borderless={true} variant="dark" style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}>
                 {props.jobs
                     .filter(filterByStatus("completed"))
                     .filter((foundJobs) => {
@@ -29,17 +29,15 @@ const UserPostedJobs = (props) => {
                     .map((job) => (
                         <tr key={job.id}>
                             <td>
-                                <div className="border" style={{textAlign:"center"}}>
-                                    <p>Title: <br />{job.title}</p>
-                                    <p>Description: <br />{job.description}</p>
-                                    <p>Job Status: <br />{job.status}</p>
-                                </div>
+                                <JobCard job={job} buttonOnClick={false} showMap={false} showStatus />
+
+                                <br />
                             </td>
                         </tr>
                     ))}
             </Table>
             <h1>Completed Posted Jobs</h1>
-            <Table variant="dark" style={{width:"50%", marginLeft: "auto", marginRight: "auto"}}>
+            <Table variant="dark" style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}>
                 {props.jobs
                     .filter((foundJobs) => {
                         //   console.log(foundJobs)
@@ -52,13 +50,12 @@ const UserPostedJobs = (props) => {
                     .map((job) => (
                         <tr key={job.id}>
                             <td>
-                                <div className="border" style={{textAlign:"center"}}>
-                                    <p>Title: <br />{job.title}</p>
-                                    <p>Description: <br />{job.description}</p>
-                                    <Button className="btn button-row" variant="warning" onClick={() => props.rateJob(job.job_accepter)}>
-                                        Rate Job
-                                    </Button>
-                                </div>
+                                <JobCard
+                                    job={job}
+                                    buttonOnClick={false}
+                                    //  buttonOnClick={() => props.rateJob(job.job_accepter)}
+                                    //  buttonTitle="Rate Job"
+                                />
                             </td>
                         </tr>
                     ))}

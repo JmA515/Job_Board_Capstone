@@ -39,8 +39,7 @@ import Table from "react-bootstrap/Table";
 import "./TitleBar.css";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import { StaticGoogleMap, Marker } from "react-static-google-map";
-
+import { JobCard } from "../JobCard";
 // import { Link } from "react-router-dom";
 
 const TitleBar = (props) => {
@@ -57,7 +56,7 @@ const TitleBar = (props) => {
                     }}
                 />
             </div>
-            <Table variant="dark" style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}>
+            <Table borderless = {true} variant="dark" style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}>
                 {props.jobs
                     .filter((allJobs) => {
                         if (allJobs.status === "available") {
@@ -74,32 +73,8 @@ const TitleBar = (props) => {
                     .map((job) => (
                         <tr key={job.id}>
                             <td style={{ textAlign: "center" }}>
-                                <div className="border">
-                                    <p>
-                                        Title:
-                                        <br /> {job.title}
-                                    </p>
-                                    <p>
-                                        Description:
-                                        <br /> {job.description}
-                                    </p>
-                                    <Button
-                                        className="btn button-row"
-                                        variant="warning"
-                                        onClick={() => props.acceptJob(job.id)}
-                                        style={{ margin: ".25em" }}
-                                    >
-                                        Accept Job
-                                    </Button>
+                            <JobCard job={job} buttonOnClick={() => props.acceptJob(job.id)} buttonTitle="Accept Job"/>
 
-                                    {!!job.lat_lng && (
-                                        <div>
-                                            <StaticGoogleMap size="200x200" className="img-fluid" apiKey="AIzaSyBGPE1IDjIUxjX62u-JW5O_YQ6adLkCUgg">
-                                                <Marker location={job.lat_lng} color="red" />
-                                            </StaticGoogleMap>
-                                        </div>
-                                    )}
-                                </div>
                                 <br></br>
                                 <br></br>
                             </td>
