@@ -53,6 +53,7 @@ const UserPostedJobs = (props) => {
                                 <JobCard
                                     job={job}
                                     buttonOnClick={false}
+                                    showMap={false}
                                     //  buttonOnClick={() => props.rateJob(job.job_accepter)}
                                     //  buttonTitle="Rate Job"
                                 />
