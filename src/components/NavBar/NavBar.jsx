@@ -60,6 +60,7 @@ const NavBar = (props) => {
                     </React.Fragment>
                 }
             </Nav>
+            <br /><h1>Welcome to Good Neighbor</h1>
             <div style={{padding:"3em"}}>
                 {props.user && <h1>Welcome {props.user.first_name}</h1>}
             </div>
