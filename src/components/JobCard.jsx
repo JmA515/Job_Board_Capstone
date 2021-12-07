@@ -7,10 +7,9 @@ export const JobCard = (props) => {
             <div className="flex-grow-1" style={{ textAlign: "center" }}>
                 <p>Title: {props.job.title}</p>
                 <p>Description: {props.job.description}</p>
-                {props.showStatus && <p>
-                    Status: {props.job.status}</p>}
+                {props.showStatus && <p>Status: {props.job.status}</p>}
                 {props.buttonOnClick != false && (
-                    <Button className="btn button-row" variant="warning" onClick={props.buttonOnClick}>
+                    <Button className="btn button-row" variant="primary" onClick={props.buttonOnClick}>
                         {props.buttonTitle}
                     </Button>
                 )}{" "}
@@ -26,8 +25,7 @@ export const JobCard = (props) => {
     );
 };
 
-JobCard.defaultProps={
+JobCard.defaultProps = {
     showMap: true,
-    showStatus: false
-}
-
+    showStatus: false,
+};

@@ -1,46 +1,9 @@
-// import React from 'react';
-
-// const TitleBar = (props) => {
-//     return (
-//         <div className = "row row-space">
-//             <div className = "col-md-12" style = {{padding: 0}}>
-//                 <div className = "titlebar-nav">
-//                     <table>
-//                         <thead>
-//                             <tr>
-//                                 <td className = "table-data">Title</td>
-//                                 <td className = "table-data">Description</td>
-//                                 <td className = "table-data">Post Date</td>
-//                                 <td className = "table-data">Job Creator</td>
-//                             </tr>
-//                         </thead>
-//                         <tbody className = "table-head">
-//                             {props.jobs.map((job) => (
-//                                 <tr key = {job.id}>
-//                                     <td className = "table-data">{job.title}</td>
-//                                     <td className = "table-data">{job.description}</td>
-//                                     <td className = "table-data">{job.post_date}</td>
-//                                     <td className = "table-data">{job.job_creator_id}</td>
-//                                     <button className = "table-data btn-outline-success">Accept Job</button>
-//                                 </tr>
-//                             ))}
-//                         </tbody>
-//                     </table>
-//                 </div>
-//             </div>
-//         </div>
-//      );
-// }
-
-// export default TitleBar;
-
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import "./TitleBar.css";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import { JobCard } from "../JobCard";
-// import { Link } from "react-router-dom";
 
 const TitleBar = (props) => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -56,7 +19,7 @@ const TitleBar = (props) => {
                     }}
                 />
             </div>
-            <Table borderless = {true} variant="dark" style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}>
+            <Table borderless={true} variant="dark" style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}>
                 {props.jobs
                     .filter((allJobs) => {
                         if (allJobs.status === "available") {
@@ -73,14 +36,12 @@ const TitleBar = (props) => {
                     .map((job) => (
                         <tr key={job.id}>
                             <td style={{ textAlign: "center" }}>
-                            <JobCard job={job} buttonOnClick={() => props.acceptJob(job.id)} buttonTitle="Accept Job"/>
+                                <JobCard job={job} buttonOnClick={() => props.acceptJob(job.id)} buttonTitle="Accept Job" />
 
                                 <br></br>
                                 <br></br>
                             </td>
                             <td></td>
-                            {/* <Link to = {`/bookDetails/${book.id}`}> */}
-                            {/* </Link> */}
                         </tr>
                     ))}
             </Table>

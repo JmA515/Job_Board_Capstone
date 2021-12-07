@@ -33,13 +33,11 @@ class App extends Component {
     componentDidMount() {
         this.getAllJobs();
         this.token();
-        // window.location = '/login';
     }
 
     registerUser = async (userRegisteredObject) => {
         try {
             const response = await axios.post("http://127.0.0.1:8000/api/auth/register/", userRegisteredObject);
-            //   this.loginUser({'userName' : userRegisteredObject.userName, 'password': userRegisteredObject.password })
             window.location = "/login";
         } catch (error) {
             console.log(error, "error with register user");
@@ -56,7 +54,7 @@ class App extends Component {
             let jwt = this.token();
             this.getUserDetails(this.state.user.user_id);
             console.log("Login State user:", this.state.user);
-            window.location='/home'
+            window.location = "/home";
         } catch (error) {
             console.log(error, "error with logged in user");
             return error;
@@ -78,7 +76,6 @@ class App extends Component {
                     this.getUserDetails();
                 }
             );
-            //   return this.state.user.id;
             return jwt;
         } catch (error) {
             console.log(error, "error with token function");
@@ -86,7 +83,6 @@ class App extends Component {
     };
 
     getUserDetails = async () => {
-        // const jwt = localStorage.getItem('token');
         console.log("User id", this.state.user);
         try {
             let response = await axios.get("http://127.0.0.1:8000/api/users/profile/", {
@@ -161,10 +157,8 @@ class App extends Component {
     };
 
     jobComplete = async (jobId) => {
-        // let acceptingUser = jwtDecode(localStorage.getItem("token"));
         try {
             let thing = {
-                // job_accepter: acceptingUser.user_id,
                 status: "completed",
             };
             let response = await axios.patch(`http://127.0.0.1:8000/api/jobs/accept/${jobId}/`, thing, {
@@ -188,28 +182,14 @@ class App extends Component {
         } catch (er) {
             console.log("Error with the userDetails", er);
         }
-        //     try {
-        //     let thing = {
-        //         job_satisfaction_rating: job_satisfaction_rating += parseInt(rating),
-        //     };
-        //     let response = await axios.patch(`http://127.0.0.1:8000/api/users/profile/${userRatedId}/`, thing, {
-        //         headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-        //     });
-        //     this.getAllJobs();
-        // } catch (error) {
-        //     console.log(error, "error posting job");
-        // }
     };
 
     render() {
-        // console.log(this.state);
         if (!this.state.jwtToken) {
             return (
                 <div>
-                    
-                    {/* <Login login={this.loginUser} /> */}
                     <Container fluid>
-                        <NavBar  user={this.state.user} logOutUser={this.logOutUser} />
+                        <NavBar user={this.state.user} logOutUser={this.logOutUser} />
                         <Switch>
                             <Route path="/register" render={(props) => <RegisterUser {...props} registerUser={this.registerUser} />} />
                             <Route path="/login" render={(props) => <Login {...props} login={this.loginUser} />} />
@@ -225,7 +205,7 @@ class App extends Component {
         return (
             <Container fluid>
                 <div className="bg-color">
-                    <NavBar  user={this.state.user} logOutUser={this.logOutUser} />
+                    <NavBar user={this.state.user} logOutUser={this.logOutUser} />
                     <Switch>
                         <Route path="/register" render={(props) => <RegisterUser {...props} registerUser={this.registerUser} />} />
                         <Route path="/login" render={(props) => <Login {...props} login={this.loginUser} />} />
@@ -263,7 +243,9 @@ class App extends Component {
                             />
                             <Route
                                 path="/home"
-                                render={(props) => <TitleBar {...props} getAllJobs={this.getAllJobs} jobs={this.state.jobs} acceptJob={this.acceptJob} />}
+                                render={(props) => (
+                                    <TitleBar {...props} getAllJobs={this.getAllJobs} jobs={this.state.jobs} acceptJob={this.acceptJob} />
+                                )}
                             />
                             <Route
                                 path="/post_job"
@@ -272,17 +254,6 @@ class App extends Component {
                                 )}
                             />
                         </>
-                        {/* <Route 
-                            path = "/home" 
-                            render = {props => {
-                            if(!this.state.user){
-                                return <Redirect to = '/login' />;
-                            } else {
-                                return <TitleBar user = {this.state.user}/> 
-                                }
-                            }} 
-                        /> */}
-                        {/* <Redirect to="/" /> */}
                     </Switch>
                 </div>
             </Container>

@@ -16,5 +16,9 @@
 }
 
 .bg-color {
-    background-color: rgb(14, 151, 67);
+    background-color: rgb(161, 161, 177);
+}
+
+body {
+    background-color: rgb(161, 161, 177);
 }

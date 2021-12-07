@@ -54,47 +54,34 @@ const RegisterUser = (props) => {
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridUserName">
                             <Form.Label htmlFor="">User Name</Form.Label>
-                            {/* <input className="Register-Input" name="username" value={registerUser.username} onChange={handleChange} type="text" /> */}
                             <Form.Control name="username" value={registerUser.username} onChange={handleChange} type="text" />
                         </Form.Group>
                         <br />
                         <Form.Group as={Col} controlId="formGridPassword">
                             <Form.Label htmlFor="">Password</Form.Label>
-                            {/* <input className="Register-Input" name="password" value={registerUser.password} onChange={handleChange} type="text" /> */}
                             <Form.Control name="password" value={registerUser.password} onChange={handleChange} type="text" />
                         </Form.Group>
                     </Row>
-                    {/* <br /> */}
                     <Form.Group className="mb-3" controlId="formGridEmail">
                         <Form.Label htmlFor="">Email</Form.Label>
-                        {/* <input className="Register-Input" name="email" value={registerUser.email} onChange={handleChange} type="text" /> */}
                         <Form.Control name="email" value={registerUser.email} onChange={handleChange} type="text" />
                     </Form.Group>
-                    {/* <br /> */}
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridFirstName">
                             <Form.Label htmlFor="">First Name</Form.Label>
-                            {/* <input className="Register-Input" name="first_name" value={registerUser.first_name} onChange={handleChange} type="text" /> */}
                             <Form.Control name="first_name" value={registerUser.first_name} onChange={handleChange} type="text" />
                         </Form.Group>
                         <br />
                         <Form.Group as={Col} controlId="formGridLastName">
                             <Form.Label htmlFor="">Last Name</Form.Label>
-                            {/* <input className="Register-Input" name="last_name" value={registerUser.last_name} onChange={handleChange} type="text" /> */}
                             <Form.Control name="last_name" value={registerUser.last_name} onChange={handleChange} type="text" />
                         </Form.Group>
                     </Row>
-                    {/* <br /> */}
                     <Form.Group className="mb-3" controlId="formGridEmail">
                         <Form.Label htmlFor="">Address</Form.Label>
-                        {/* <input className="Register-Input" name="address" value={registerUser.address} onChange={handleChange} type="text" /> */}
                         <GooglePlacesAutocomplete selectProps={{ value, onChange: setValue, placeholder: "address..." }} />
                     </Form.Group>
-                    {/* <br /> */}
-                    {/* <label htmlFor="">Zipcode</label> */}
-                    {/* <input className="Register-Input" name="zip_code" value={registerUser.zip_code} onChange={handleChange} type="text" /> */}
-                    {/* <br /> */}
-                    <Button variant="warning" type="submit">
+                    <Button variant="primary" type="submit">
                         Create Account
                     </Button>
                 </Form>

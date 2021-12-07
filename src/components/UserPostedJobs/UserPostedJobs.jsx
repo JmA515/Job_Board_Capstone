@@ -13,15 +13,11 @@ const filterByStatus = (status) => (allJobs) => {
 const UserPostedJobs = (props) => {
     return (
         <div>
-            {/* {console.log("find jobs")} */}
-            {/* {console.log(props.userId)} */}
-            {/* {console.log(props.jobs)} */}
             <h1>Posted Jobs</h1>
             <Table borderless={true} variant="dark" style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}>
                 {props.jobs
                     .filter(filterByStatus("completed"))
                     .filter((foundJobs) => {
-                        //   console.log(foundJobs)
                         if (props.userId === foundJobs.job_creator_id) {
                             return foundJobs;
                         }
@@ -30,7 +26,6 @@ const UserPostedJobs = (props) => {
                         <tr key={job.id}>
                             <td>
                                 <JobCard job={job} buttonOnClick={false} showMap={false} showStatus />
-
                                 <br />
                             </td>
                         </tr>
@@ -40,7 +35,6 @@ const UserPostedJobs = (props) => {
             <Table variant="dark" style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}>
                 {props.jobs
                     .filter((foundJobs) => {
-                        //   console.log(foundJobs)
                         if (props.userId === foundJobs.job_creator_id) {
                             return foundJobs;
                         }
@@ -50,13 +44,7 @@ const UserPostedJobs = (props) => {
                     .map((job) => (
                         <tr key={job.id}>
                             <td>
-                                <JobCard
-                                    job={job}
-                                    buttonOnClick={false}
-                                    showMap={false}
-                                    //  buttonOnClick={() => props.rateJob(job.job_accepter)}
-                                    //  buttonTitle="Rate Job"
-                                />
+                                <JobCard job={job} buttonOnClick={false} showMap={false} />
                             </td>
                         </tr>
                     ))}
